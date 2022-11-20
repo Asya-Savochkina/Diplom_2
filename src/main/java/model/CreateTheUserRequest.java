@@ -72,4 +72,15 @@ public class CreateTheUserRequest {
         return createTheUserRequest;
     }
 
+    public static CreateTheUserRequest getUserForAuth(CreateTheUserRequest createTheUserRequest) {
+        return new CreateTheUserRequest(createTheUserRequest.getEmail(), createTheUserRequest.getPassword(), null);
+    }
+
+    public String createRandomEmail() {
+        return RandomStringUtils.randomAlphanumeric(5) + "@example.ru";
+    }
+
+    public String createRandomPassword() {
+        return RandomStringUtils.randomAlphanumeric(8);
+    }
 }

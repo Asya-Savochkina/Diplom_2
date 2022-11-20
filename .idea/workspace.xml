@@ -6,6 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b338f53c-c946-4eed-8dd8-2ab6984ce8bc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/UserClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/config/BurgerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/BurgerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/CreateTheUserRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/CreateTheUserRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/UserAuthRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/UserAuthRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/CreateTheUserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CreateTheUserTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,23 +44,12 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.CreateTheUserTest.createUserWithoutAllRequiredField">
-    <configuration name="CreateTheUserTest.createExistingUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.UserLogInTest">
+    <configuration name="CreateTheUserTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Diplom_2" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="CreateTheUserTest" />
-      <option name="METHOD_NAME" value="createExistingUser" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CreateTheUserTest.createNewUniqUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Diplom_2" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="CreateTheUserTest" />
-      <option name="METHOD_NAME" value="createNewUniqUser" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -70,11 +64,42 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UserLogInTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Diplom_2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UserLogInTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserLogInTest.CorrectUserAuthorization" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Diplom_2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UserLogInTest" />
+      <option name="METHOD_NAME" value="CorrectUserAuthorization" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserLogInTest.checkSuccessAuthWithCorrectUserData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Diplom_2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UserLogInTest" />
+      <option name="METHOD_NAME" value="checkSuccessAuthWithCorrectUserData" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UserLogInTest" />
+        <item itemvalue="JUnit.UserLogInTest.checkSuccessAuthWithCorrectUserData" />
+        <item itemvalue="JUnit.CreateTheUserTest" />
+        <item itemvalue="JUnit.UserLogInTest.CorrectUserAuthorization" />
         <item itemvalue="JUnit.CreateTheUserTest.createUserWithoutAllRequiredField" />
-        <item itemvalue="JUnit.CreateTheUserTest.createExistingUser" />
-        <item itemvalue="JUnit.CreateTheUserTest.createNewUniqUser" />
       </list>
     </recent_temporary>
   </component>
@@ -99,5 +124,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/client/UserClient.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
