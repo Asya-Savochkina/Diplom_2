@@ -38,7 +38,6 @@ public class CreateTheOrderTest {
                 .body("accessToken", notNullValue())
                 .extract()
                 .path("accessToken");
-
     }
 
     @Test

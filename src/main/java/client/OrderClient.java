@@ -38,4 +38,27 @@ public class OrderClient {
         response.then();
         return  response;
     }
+
+    @Step
+    public Response getOrderListForAuthUser(String accessToken) {
+        Response response = given()
+                .header("Authorization", accessToken)
+                .header("Content-type", "application/json")
+                .baseUri(getBaseUri())
+                .and()
+                .get("orders");
+        response.then();
+        return response;
+    }
+
+    @Step
+    public Response getOrderListWithoutAuth() {
+        Response response = given()
+                .header("Content-type", "application/json")
+                .baseUri(getBaseUri())
+                .and()
+                .get("orders");
+        response.then();
+        return response;
+    }
 }

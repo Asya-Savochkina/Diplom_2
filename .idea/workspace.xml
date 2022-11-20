@@ -7,8 +7,8 @@
     <list default="true" id="b338f53c-c946-4eed-8dd8-2ab6984ce8bc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/client/OrderClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/OrderClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/ChangeUserDataRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/ChangeUserDataRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/CreateTheOrderRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/CreateTheOrderRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CreateTheOrderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CreateTheOrderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/GetTheOrderListTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/GetTheOrderListTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +41,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.CreateTheOrderTest">
+  <component name="RunManager" selected="JUnit.GetTheOrderListTest.shouldGetTheOrderListForAuthUser">
     <configuration name="CreateTheOrderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Diplom_2" />
       <option name="PACKAGE_NAME" value="" />
@@ -61,16 +61,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CreateTheOrderTest.checkTheCreationOfCorrectOrderWithoutAuth" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Diplom_2" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="CreateTheOrderTest" />
-      <option name="METHOD_NAME" value="checkTheCreationOfCorrectOrderWithoutAuth" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="CreateTheOrderTest.checkTheCreationOfOrderWithWrongIngredientHash" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Diplom_2" />
       <option name="PACKAGE_NAME" value="" />
@@ -81,11 +71,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CreateTheOrderTest.checkTheCreationOfOrderWithoutIngredients" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GetTheOrderListTest.checkThatCantGetTheOrderListWithoutAuth" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Diplom_2" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="CreateTheOrderTest" />
-      <option name="METHOD_NAME" value="checkTheCreationOfOrderWithoutIngredients" />
+      <option name="MAIN_CLASS_NAME" value="GetTheOrderListTest" />
+      <option name="METHOD_NAME" value="checkThatCantGetTheOrderListWithoutAuth" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GetTheOrderListTest.shouldGetTheOrderListForAuthUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Diplom_2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GetTheOrderListTest" />
+      <option name="METHOD_NAME" value="shouldGetTheOrderListForAuthUser" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -93,11 +93,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GetTheOrderListTest.shouldGetTheOrderListForAuthUser" />
+        <item itemvalue="JUnit.GetTheOrderListTest.checkThatCantGetTheOrderListWithoutAuth" />
         <item itemvalue="JUnit.CreateTheOrderTest" />
         <item itemvalue="JUnit.CreateTheOrderTest.checkTheCreationOfCorrectOrderWithAuth" />
         <item itemvalue="JUnit.CreateTheOrderTest.checkTheCreationOfOrderWithWrongIngredientHash" />
-        <item itemvalue="JUnit.CreateTheOrderTest.checkTheCreationOfOrderWithoutIngredients" />
-        <item itemvalue="JUnit.CreateTheOrderTest.checkTheCreationOfCorrectOrderWithoutAuth" />
       </list>
     </recent_temporary>
   </component>
