@@ -1,5 +1,7 @@
 package model;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 public class ChangeUserDataRequest {
     private String email;
     private String name;
@@ -35,5 +37,9 @@ public class ChangeUserDataRequest {
 
     public void setAuthorization(String authorization) {
         this.authorization = authorization;
+    }
+
+    public String createNewPassword() {
+        return RandomStringUtils.randomAlphanumeric(8);
     }
 }
