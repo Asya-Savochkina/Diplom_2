@@ -3,11 +3,8 @@ package client;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import model.CreateTheUserRequest;
-import model.UserAuthRequest;
-
 import static config.BurgerConfig.*;
 import static io.restassured.RestAssured.given;
-import static model.CreateTheUserRequest.getUserAllRequiredField;
 import static model.CreateTheUserRequest.getUserForAuth;
 
 public class UserClient {
@@ -39,11 +36,39 @@ public class UserClient {
                 .header("Content-type", "application/json")
                 .baseUri(getBaseUri())
                 .and()
-                .body(getUserForAuth(createTheUserRequest))
+                //.body(getUserForAuth(createTheUserRequest))
+                .body(createTheUserRequest)
                 .when()
                 .post(USER_AUTH);
         response.then();
         return  response;
+    }
+
+    @Step("Запрос на изменение данных авторизованного пользователя")
+    public Response changeUserDataWithAuth(CreateTheUserRequest createTheUserRequest, String accessToken) {
+        Response response = given()
+                .header("Authorization", accessToken)
+                .header("Content-type", "application/json")
+                .baseUri(getBaseUri())
+                .and()
+                .body(createTheUserRequest)
+                .when()
+                .patch(USER);
+        response.then();
+        return response;
+    }
+
+    @Step("Запрос на изменение данных неавторизованного пользователя")
+    public Response changeUserDataWithoutAuth(CreateTheUserRequest createTheUserRequest) {
+        Response response = given()
+                .header("Content-type", "application/json")
+                .baseUri(getBaseUri())
+                .and()
+                .body(createTheUserRequest)
+                .when()
+                .patch(USER);
+        response.then();
+        return response;
     }
 
     @Step("Запрос на удаление пользователя")

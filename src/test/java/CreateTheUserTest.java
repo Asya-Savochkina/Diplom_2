@@ -12,6 +12,9 @@ public class CreateTheUserTest {
 
     UserClient userClient;
     CreateTheUserRequest createTheUserRequest;
+    CreateTheUserRequest userForCorrectReg;
+    CreateTheUserRequest doubleUserForReg;
+
     String accessToken;
 
 
@@ -21,7 +24,7 @@ public class CreateTheUserTest {
 
     @Before
     public void setup() {
-        createTheUserRequest = CreateTheUserRequest.getUserAllRequiredField();
+        //createTheUserRequest = CreateTheUserRequest.getUserAllRequiredField();
         userClient = new UserClient();
     }
 
@@ -29,19 +32,21 @@ public class CreateTheUserTest {
     @DisplayName("Корректное создание пользователя")
     @Description("Проверяем позитивный сценарий создания уникального пользователя. Ожидаем, что возвращается \"success\": true,")
     public void checkTheCreationOfNewUniqUser() {
-        userClient.getUniqUser(createTheUserRequest.getUserAllRequiredField())
+        userForCorrectReg = CreateTheUserRequest.getUserAllRequiredField();
+        userClient.getUniqUser(userForCorrectReg)
                 .then().statusCode(200)
                 .and()
                 .assertThat().body("success", equalTo(true));
-        accessToken = userClient.getAccessToken(createTheUserRequest);
+        accessToken = userClient.getAccessToken(userForCorrectReg);
     }
 
     @Test
     @DisplayName("Создание уже зарегистрированного пользователя")
     @Description("Проверяем сценарий создания дубля пользователя. Ожидаем, что возвращается код 403 и \"message\": \"User already exists ")
     public void checkTheCreationOfExistingUser() {
-        userClient.getUniqUser(createTheUserRequest.getUserAllRequiredField());
-        userClient.getUniqUser(createTheUserRequest.getUserAllRequiredField())
+        doubleUserForReg = CreateTheUserRequest.getUserAllRequiredField();
+        userClient.getUniqUser(doubleUserForReg);
+        userClient.getUniqUser(doubleUserForReg)
                 .then().statusCode(403)
                 .and()
                 .assertThat().body("message", equalTo(EXPECTED_MESSAGE_DOUBLE));
@@ -51,7 +56,8 @@ public class CreateTheUserTest {
     @DisplayName("Создание пользователя с незаполненным обязательным полем email")
     @Description("Проверяем сценарий создания дубля пользователя. Ожидаем, что возвращается код 403 и \"message\": \"Email, password and name are required fields ")
     public void verifyNotCreateUserWithoutEmail() {
-        userClient.getUniqUser(createTheUserRequest.getUserWithoutMail())
+        createTheUserRequest = CreateTheUserRequest.getUserAllRequiredField();
+        userClient.getUniqUser(CreateTheUserRequest.getUserWithoutMail())
                 .then().statusCode(403)
                 .and()
                 .assertThat().body("message", equalTo(EXPECTED_MESSAGE_EMPTY_REQUIRED_FIELD));
@@ -61,7 +67,8 @@ public class CreateTheUserTest {
     @DisplayName("Создание пользователя с незаполненным обязательным полем password")
     @Description("Проверяем сценарий создания дубля пользователя. Ожидаем, что возвращается код 403 и \"message\": \"Email, password and name are required fields ")
     public void verifyNotCreateUserWithoutPassword() {
-        userClient.getUniqUser(createTheUserRequest.getUserWithoutPassword())
+        createTheUserRequest = CreateTheUserRequest.getUserAllRequiredField();
+        userClient.getUniqUser(CreateTheUserRequest.getUserWithoutPassword())
                 .then().statusCode(403)
                 .and()
                 .assertThat().body("message", equalTo(EXPECTED_MESSAGE_EMPTY_REQUIRED_FIELD));
@@ -71,7 +78,8 @@ public class CreateTheUserTest {
     @DisplayName("Создание пользователя с незаполненным обязательным полем name")
     @Description("Проверяем сценарий создания дубля пользователя. Ожидаем, что возвращается код 403 и \"message\": \"Email, password and name are required fields ")
     public void verifyNotCreateUserWithoutName() {
-        userClient.getUniqUser(createTheUserRequest.getUserWithoutName())
+        createTheUserRequest = CreateTheUserRequest.getUserAllRequiredField();
+        userClient.getUniqUser(CreateTheUserRequest.getUserWithoutName())
                 .then().statusCode(403)
                 .and()
                 .assertThat().body("message", equalTo(EXPECTED_MESSAGE_EMPTY_REQUIRED_FIELD));

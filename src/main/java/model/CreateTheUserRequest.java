@@ -1,5 +1,6 @@
 package model;
 
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class CreateTheUserRequest {
@@ -76,11 +77,14 @@ public class CreateTheUserRequest {
         return new CreateTheUserRequest(createTheUserRequest.getEmail(), createTheUserRequest.getPassword(), null);
     }
 
-    public String createRandomEmail() {
+    public static CreateTheUserRequest getNewUserDataForChange() {
+        return new CreateTheUserRequest(createRandomEmail(), null, createRandomName());
+    }
+    public static String createRandomEmail() {
         return RandomStringUtils.randomAlphanumeric(5) + "@example.ru";
     }
 
-    public String createRandomPassword() {
-        return RandomStringUtils.randomAlphanumeric(8);
+    public static String createRandomName() {
+        return RandomStringUtils.randomAlphanumeric(7);
     }
 }
