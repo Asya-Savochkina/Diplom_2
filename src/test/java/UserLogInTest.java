@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.hamcrest.Matchers.equalTo;
+import static org.apache.http.HttpStatus.*;
 
 public class UserLogInTest {
     UserClient userClient;
@@ -20,6 +21,15 @@ public class UserLogInTest {
         userClient = new UserClient();
     }
 
+    @After
+    public void deleteTestUser() {
+        if (accessToken != null) {
+            userClient.removeForUser(accessToken)
+                    .then()
+                    .statusCode(SC_ACCEPTED);
+        }
+    }
+
     @Test
     @DisplayName("Корректная авторизация пользователя")
     @Description("Проверяем позитивный сценарий авторизации пользователя. Ожидаем, что возвращается \"success\": true, код 200")
@@ -27,7 +37,7 @@ public class UserLogInTest {
         createTheUserRequest = CreateTheUserRequest.getUserAllRequiredField();
         userClient.getUniqUser(createTheUserRequest);
         userClient.authorizationForUser(createTheUserRequest)
-                .then().statusCode(200)
+                .then().statusCode(SC_OK)
                 .and()
                 .assertThat().body("success", equalTo(true));
         accessToken = userClient.getAccessToken(createTheUserRequest);
@@ -41,18 +51,9 @@ public class UserLogInTest {
         userClient.getUniqUser(createTheUserWithIncorrectEmail);
         createTheUserWithIncorrectEmail.setEmail(CreateTheUserRequest.createRandomEmail());
         userClient.authorizationForUser(createTheUserWithIncorrectEmail)
-                .then().statusCode(401)
+                .then().statusCode(SC_UNAUTHORIZED)
                 .and()
                 .assertThat().body("message", equalTo(EXPECTED_MESSAGE_INCORRECT_EMAIL_OR_PASSWORD));
         accessToken = userClient.getAccessToken(createTheUserWithIncorrectEmail);
-    }
-
-    @After
-    public void deleteTestUser() {
-        if (accessToken != null) {
-            userClient.removeForUser(accessToken)
-                    .then()
-                    .statusCode(202);
-        }
     }
 }

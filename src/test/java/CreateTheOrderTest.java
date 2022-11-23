@@ -6,7 +6,7 @@ import model.CreateTheUserRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
+import static org.apache.http.HttpStatus.*;
 import static model.CreateTheOrderRequest.*;
 import static model.CreateTheUserRequest.getUserAllRequiredField;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -33,11 +33,20 @@ public class CreateTheOrderTest {
         accessToken = userClient.getUniqUser(createTheUserRequest)
                 .then()
                 .assertThat()
-                .statusCode(200)
+                .statusCode(SC_CREATED)
                 .and()
                 .body("accessToken", notNullValue())
                 .extract()
                 .path("accessToken");
+    }
+
+    @After
+    public void deleteTestUser() {
+        if (accessToken != null) {
+            userClient.removeForUser(accessToken)
+                    .then()
+                    .statusCode(SC_ACCEPTED);
+        }
     }
 
     @Test
@@ -45,7 +54,7 @@ public class CreateTheOrderTest {
     public void checkTheCreationOfCorrectOrderWithAuth() {
             fullOrderRequest = createTheOrderRequestWithIngredients();
             orderClient.createNewOrderWithAuth(fullOrderRequest, accessToken)
-                    .then().statusCode(200)
+                    .then().statusCode(SC_OK)
                     .and()
                     .body("success", equalTo(true));
     }
@@ -64,7 +73,7 @@ public class CreateTheOrderTest {
     public void checkTheCreationOfOrderWithoutIngredients() {
         emptyOrderRequest = createTheOrderRequestWithoutIngredients();
         orderClient.createNewOrderWithAuth(emptyOrderRequest, accessToken)
-                .then().statusCode(400)
+                .then().statusCode(SC_BAD_REQUEST)
                 .and()
                 .assertThat().body("message", equalTo(EXPECTED_MESSAGE_NO_INGREDIENTS));
     }
@@ -74,15 +83,6 @@ public class CreateTheOrderTest {
     public void checkTheCreationOfOrderWithWrongIngredientHash() {
         wrongOrderRequest = createTheOrderRequestWrongHashOfIngredients();
         orderClient.createNewOrderWithAuth(wrongOrderRequest, accessToken)
-                .then().statusCode(500);
-    }
-
-    @After
-    public void deleteTestUser() {
-        if (accessToken != null) {
-            userClient.removeForUser(accessToken)
-                    .then()
-                    .statusCode(202);
-        }
+                .then().statusCode(SC_INTERNAL_SERVER_ERROR);
     }
 }

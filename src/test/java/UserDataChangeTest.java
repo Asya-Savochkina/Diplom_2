@@ -6,6 +6,7 @@ import model.CreateTheUserRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import static org.apache.http.HttpStatus.*;
 
 import static model.CreateTheUserRequest.getNewUserDataForChange;
 import static model.CreateTheUserRequest.getUserAllRequiredField;
@@ -18,10 +19,19 @@ public class UserDataChangeTest {
     UserClient userClient;
     String accessToken;
     private static final String EXPECTED_MESSAGE_NOT_AUTH = "You should be authorised";
+    
     @Before
     public void setUp() {
         userClient = new UserClient();
+    }
 
+    @After
+    public void deleteTestUser() {
+        if (accessToken != null) {
+            userClient.removeForUser(accessToken)
+                    .then()
+                    .statusCode(202);
+        }
     }
 
     @Test
@@ -33,7 +43,7 @@ public class UserDataChangeTest {
         userClient.changeUserDataWithAuth(changedUser, accessToken)
                 .then()
                 .assertThat()
-                .statusCode(200)
+                .statusCode(SC_OK)
                 .and()
                 .body("user.email", is(changedUser.getEmail().toLowerCase()));
     }
@@ -45,18 +55,9 @@ public class UserDataChangeTest {
         userClient.changeUserDataWithoutAuth(createTheUserRequest)
                 .then()
                 .assertThat()
-                .statusCode(401)
+                .statusCode(SC_UNAUTHORIZED)
                 .and()
                 .body("message", equalTo(EXPECTED_MESSAGE_NOT_AUTH));
-    }
-
-    @After
-    public void deleteTestUser() {
-        if (accessToken != null) {
-            userClient.removeForUser(accessToken)
-                    .then()
-                    .statusCode(202);
-        }
     }
 }
 

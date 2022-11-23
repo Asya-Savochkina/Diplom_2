@@ -6,6 +6,7 @@ import model.CreateTheUserRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import static org.apache.http.HttpStatus.*;
 
 import static model.CreateTheOrderRequest.createTheOrderRequestWithIngredients;
 import static model.CreateTheUserRequest.getUserAllRequiredField;
@@ -24,6 +25,15 @@ public class GetTheOrderListTest {
         orderClient = new OrderClient();
     }
 
+    @After
+    public void deleteTestUser() {
+        if (accessToken != null) {
+            userClient.removeForUser(accessToken)
+                    .then()
+                    .statusCode(SC_ACCEPTED);
+        }
+    }
+
     @Test
     @DisplayName("Получение списка заказов авторизованного пользователя")
     public void shouldGetTheOrderListForAuthUser() {
@@ -33,7 +43,7 @@ public class GetTheOrderListTest {
         orderClient.createNewOrderWithAuth(createTheOrderRequest, accessToken);
         orderClient.getOrderListForAuthUser(accessToken)
                 .then()
-                .statusCode(200)
+                .statusCode(SC_OK)
                 .and()
                 .body("success", equalTo(true));
     }
@@ -45,17 +55,8 @@ public class GetTheOrderListTest {
         orderClient.createNewOrderWithoutAuth(createTheOrderRequest);
         orderClient.getOrderListWithoutAuth()
                 .then()
-                .statusCode(401)
+                .statusCode(SC_UNAUTHORIZED)
                 .and()
                 .body("message", equalTo(EXPECTED_MESSAGE_NOT_AUTH));
-    }
-
-    @After
-    public void deleteTestUser() {
-        if (accessToken != null) {
-            userClient.removeForUser(accessToken)
-                    .then()
-                    .statusCode(202);
-        }
     }
 }
